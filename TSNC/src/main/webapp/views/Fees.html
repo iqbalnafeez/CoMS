@@ -1,0 +1,481 @@
+
+<div align="center">
+	<alert ng-repeat="alert in alerts" type="{{alert.type}}"
+		close="closeAlert($index)">{{alert.msg}}</alert>
+
+<form name="myForm" data-ng-submit=PAYMENT()>
+	Type:<select name="select" data-ng-model="feereq.type"
+					class="inpts" required>
+						<option value="">--- select ---</option>
+						<option value="ano">Application Number</option>
+						<option value="rno">Roll Number</option>
+				</select>&nbsp;&nbsp;
+			
+			Number:
+				<input type="text" class="inpts"
+					data-ng-model="feereq.num"  required />
+				
+				&nbsp;&nbsp;Semester:
+				<select name="select" data-ng-model="feereq.sem"
+					class="inpts" required>
+						<option value="">Select</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+				</select>&nbsp;&nbsp;
+				
+			<div class="clr"></div>
+				<div align="center">
+			<input type="submit" class="button"
+					value="PAYMENT" /> &nbsp;&nbsp;
+					
+			
+
+					<button type="button" data-ng-click=HISTORY() class="button">
+						HISTORY</button>
+
+</div>
+	
+		</form>
+
+
+
+
+
+</div>
+
+
+<div data-ng-show="tabs.active()=='PAYMENT'" >
+
+	<div id="tuition-fees">
+
+		<div id="formL">
+			<label class="lb">Name of the Student:</label> <label class="lbvl">{{fee.name | limitTo: 35}}</label>
+			<label class="lb">Batch Start Year:</label> <label  class="lbvl">{{fee.batchStrYr}}</label> 
+			<label  class="lb">Course:</label>	<label  class="lbvl">{{fee.course}}</label>
+			<div class="clr"></div>
+
+			<label class="lb">Semester:</label> <label class="lbvl">{{fee.sem}}</label>
+			<div class="clr"></div>
+
+
+			<label class="lb">Last Academic Year:</label> <label class="lbvl">{{fee.lastAcademicType}}</label>
+			<div class="clr"></div>
+
+
+		</div>
+		<div id="formR">
+			<label class="lb">Actual Fees:</label> <label class="lbvl">{{fee.actualFee  | number:2}}</label>
+			 <label class="lb">Fees after concession:</label> <label class="lbvl">{{fee.feeNeedTOPay  | number:2}}</label> 
+			 <label class="lb">Fees already Paid:</label> <label class="lbvl">{{fee.feePaid  | number:2}}</label>
+			  <label class="lb">Fine</label> <label class="lbvl">{{fee.fine  | number:2}}</label>
+
+			<label class="lb">Due:</label> <label class="lbvl">{{fee.due | number:2}}</label>
+
+
+		</div>
+
+
+
+		<!--Fees Particulars Starts Here-->
+
+		<div id="formL">
+			<br />
+			<table >
+				<tr>
+			
+					<td class="tbl-head" >FEES</td>
+				
+				
+				</tr>
+				<tr>
+					<td bgcolor="#8eb8da">
+				
+									<table  	 class="tbl-inner">
+						<tr class="tbl-title">
+								<td width="50" >S.no</td>
+								<!-- <td width="229">id</td> -->
+								<td width="229" >Particulars</td>
+								<td width="134">Amount</td>
+							<!-- 	<td width="134">check</td> -->
+								 <td width="64" >&nbsp;</td>
+							<!--	<td width="64" >&nbsp;</td> -->
+							</tr>
+							<tr data-ng-repeat="feeParticulars in lsfeeParticulars">
+								<td align="center">{{ $index +1}}</td>
+							<!-- 	<td >{{feeParticulars.id}}</td> -->
+
+								<td align="left">{{feeParticulars.particulars}}</td>
+								<td align="right">{{feeParticulars.amount}}</td>
+							<!-- 	<td >{{feeParticulars.id==0?'not used':' used'}}</td> -->
+
+								<td ><input type="checkbox" name="textfield"
+									data-ng-model='feeParticulars.isnewone'
+									data-ng-change="addfee(lsfeeParticulars)" /></td>
+							<!-- 	<td >{{feeParticulars.isnewone}}</td> -->
+							</tr>
+						</table>
+					</td>
+				</tr>
+			</table>
+		</div>
+
+		<form data-ng-submit=PaymentSubmit()>
+			<div id="formR">
+				<br /> <label  class="lb">Concession:*</label> <select  class="inpts"  name="select"
+					data-ng-model="concessionstr" data-ng-change="addconcession()"
+					data-ng-options="concession.type +' (' + concession.percent + ')%' for concession in concessions"
+					required>
+					<option value="">--------Select --------</option>
+				</select>
+				<div class="clr"></div>
+				<!-- 	
+				{{concessionstr.percent}}-{{concessionstr.type}}
+					<label>concession perctage:</label>
+					<label>{{concessionstr.percent}}%</label>
+				<div class="clr"></div>
+					 -->
+
+
+				<label  class="lb">Fine Date:</label>
+		
+					<label class="lbvl">{{fee.dueDate |date:'dd/MM/yyyy'}}</label>
+		
+		
+				<div class="clr"></div>
+
+				<label  class="lb">Mode of Payment:*</label> <select class="inpts" style="width:154px;" name="select"
+					data-ng-model="fee.paymenttype" required>
+					<option value="">--------Select --------</option>
+					<option value="Cash">Cash</option>
+					<option value="Cheque">Cheque</option>
+					<option value="Scholarship">Scholarship</option>
+					<option value="BankLoan">Bank loan</option>
+
+				</select>
+				<div class="clr"></div>
+
+				<div data-ng-if="fee.paymenttype == 'Cheque' || fee.paymenttype == 'Scholarship' || fee.paymenttype == 'BankLoan'">
+
+					<label  class="lb">Cheque Number:*</label> <!-- <input class="inpts"  type="number" 
+						data-ng-model="fee.paymentnumber" min="0" data-ng-change="maxchqnum()"  required /> -->
+						
+						<input class="inpts"  type="text" maxlength="6"
+						data-ng-model="fee.paymentnumber" data-ng-change="maxchqnum()"   required />
+				<!-- 	<div class="clr"></div> -->
+					
+					<div data-ng-if="fee.paymenttype == 'Cheque'">
+					<label  class="lb">Drawn at:*</label> <input class="inpts"  type="text" 
+						data-ng-model="fee.paymentdrawnat"  maxlength="100"  required />
+					</div>
+				<!-- 	<div class="clr"></div> -->
+					
+					<div data-ng-if="fee.paymenttype == 'Scholarship' || fee.paymenttype == 'BankLoan'">
+					<label  class="lb">Bank :*</label> <input class="inpts"  type="text" 
+						data-ng-model="fee.paymentdrawnat"  maxlength="100" required />
+					</div>
+				<!-- 	<div class="clr"></div> -->
+					
+					<label  class="lb">Dated:*</label>
+			    	<p class="input-group">
+					<input class="inpts"  type="text"  data-ng-keydown="open3($event)"   data-ng-model="fee.paymentdated"  style="width:115px;"  datepicker-popup="dd-MM-yyyy"
+						is-open="opened3"  max-date="{{todaydate}}"  close-text="Close" required />
+
+					<button height=22; type="button" class="btn btn-default"
+						data-ng-click="open3($event)" >
+						<img height=14; src="images/datepickers.jpg"></img>
+					<!-- 	<i class="glyphicon glyphicon-calendar"></i> -->
+					</button>
+				</p>
+			
+			<!-- 	<div class="clr"></div> -->
+		
+				</div>
+				<div class="clr"></div>
+			
+				<label  class="lb">Amount Received:*</label> <input class="inpts"  type="number"  min="0" step="0.01" max="9999999999" 
+					data-ng-model="amountpaidnow" required data-ng-change="amountnow()"  />
+				<div class="clr"></div>
+
+				<label  class="lb">Receipt# :*</label> <input class="inpts"  type="text"
+					data-ng-model="fee.receiptNo"  maxlength="35" required />
+				<div class="clr"></div>
+
+				<label  class="lb">Payment Date:*</label>
+				<p class="input-group">
+					<input class="inpts"  data-ng-keydown="open2($event)"  style="width:115px;" type="text" datepicker-popup="dd-MM-yyyy" data-ng-model="dt"
+						is-open="opened2" data-ng-required="true" max-date="{{todaydate}}"   close-text="Close" required />
+
+					<button height=22; type="button" class="btn btn-default"
+						data-ng-click="open2($event)" >
+						<img height=14; src="images/datepickers.jpg"></img>
+					<!-- 	<i class="glyphicon glyphicon-calendar"></i> -->
+					</button>
+
+				</p>
+				<div class="clr"></div>
+
+				<label  class="lb">Remarks:*</label>
+				<br>
+				<div class="clr"></div>
+				<textarea class="txtar"  maxlength="500" style="width:333px; height:45px" data-ng-model="fee.remarks" required>
+</textarea>
+				<div class="clr"></div>
+
+			</div>
+			<div class="clr"></div>
+
+			<div align="center">
+				<input type="submit" name="Submit" value="Submit" class="button" />
+				<input type="reset" name="Reset" value="Reset" class="button" data-ng-click="resetfee()"/>
+			</div>
+		</form>
+		<!--Fees Particulars Ends Here-->
+
+		<div class="clr"></div>
+
+	</div>
+
+</div>
+<!-- 
+			PAYMENT Ends ******************************************
+			-->
+<!-- 
+			HISTORY Start ******************************************
+			-->
+<div data-ng-show="tabs.active()=='HISTORY' || tabs.active()=='PARTICULARHISTORY'"  align="center">
+
+	<table  >
+		<tr>
+			<td  class="tbl-head" >FEES History</td>
+		</tr>
+		<tr>
+			<td bgcolor="#8eb8da">
+							<table  	 class="tbl-inner">
+						<tr class="tbl-title">
+
+
+						<td width="64"  >S.no</td>
+						<td width="229" >Receipt number</td>
+						<td width="229" >Date</td>
+						<td width="229">Actual Fee</td>
+						<td width="229" >Fees after concession</td>
+					
+						<td width="229" >Fine</td>
+						<td width="229" >Due</td>
+						<td width="229" >Amount received</td>
+						
+						<td width="229" >Fee Paid(Cumulative)</td>
+						<td width="229" >Mode of Payment</td>
+						<td width="229" >Remarks</td>
+						<td width="229" >Cancel Transaction</td>
+
+					</tr>
+					<tr data-ng-repeat="feeHistorys in lsfeeHistorys">
+						<td align="center">{{ $index
+								+1}}</td>
+						<td align="left"><a href=""
+							data-ng-click="PARTICULARHISTORY(feeHistorys.id)">{{feeHistorys.receiptNo}}</a></td>
+						<td align="center">{{feeHistorys.date | date:'dd/MM/yyyy'}}</td>
+						<td align="right">{{feeHistorys.actualFee  | number:2}}</td>
+						<td align="right">{{feeHistorys.feeNeedTOPay  | number:2}}</td>
+						
+						<td align="right">{{feeHistorys.fine}}</td>
+						<td align="right">{{feeHistorys.due  | number:2}}</td>
+						<td align="right">{{feeHistorys.feePaid-lsfeeHistorys[$index-1].feePaid | number:2}}</td>
+						<td align="right">{{feeHistorys.feePaid  | number:2}}</td>
+						<td align="left">{{feeHistorys.paymenttype}}</td>
+						
+						<td align="left">{{feeHistorys.remarks}}</td>
+						<td align="center"  data-ng-if="feeHistorys.paymenttype == 'Cheque' "><button data-ng-click="reverttransaction(feeHistorys.id,(feeHistorys.feePaid-lsfeeHistorys[$index-1].feePaid)) ">cancel </button></td>
+
+					</tr>
+
+				</table>
+			</td>
+		</tr>
+	</table>
+	<br>
+	<br>
+	<div data-ng-show="tabs.active()== 'PARTICULARHISTORY'" align="center">
+
+		<table  >
+			<tr>
+				<td class="tbl-head" >FEES
+						Particulars</td>
+			</tr>
+			<tr>
+				<td bgcolor="#8eb8da">
+							<table  	 class="tbl-inner">
+						<tr class="tbl-title">
+						<td width="64">S.no</td>
+						<td width="229" >Particulars</td>
+						<td width="129">Amount</td>
+
+
+						</tr>
+						<tr data-ng-repeat="feeParticulars in lsfeeParticulars">
+							<td  align="center">{{ $index +1}}</td>
+							<td align="left">{{feeParticulars.particulars}}</td>
+							<td align="right">{{feeParticulars.amount}}</td>
+
+
+
+						</tr>
+
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+</div>
+
+<!-- 
+			HISTORY Ends ******************************************
+			-->
+
+
+
+
+
+
+
+<!-- 
+	<form name="myForm" data-ng-submit=PAYMENT()>
+		<table width=80% cellpadding="5">
+			<tr>
+				<td>Type:</td>
+				<td ><select name="select" data-ng-model="feereq.type"
+					class="txtfield1" required>
+						<option value="">----- select number type -----</option>
+						<option value="ano">Application Number</option>
+						<option value="rno">Roll Number</option>
+				</select>&nbsp;&nbsp;</td>
+				<td>&nbsp;&nbsp;Semester:</td>
+				<td><select name="select" data-ng-model="feereq.sem"
+					class="txtfield1" required>
+						<option value="">Select</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+				</select>&nbsp;&nbsp;</td>
+			</tr>
+			<tr>
+				<td><br></td>
+
+			</tr>
+			<tr>
+				<td>Number:</td>
+				<td><input type="text" class="txtfield1"
+					data-ng-model="feereq.num"  required /></td>
+
+
+				<td>&nbsp;&nbsp;Last Academic Year:</td>
+				<td><select name="select"
+					data-ng-model="feereq.lastAcademicType" class="txtfield1" required>
+						<option value="">Select</option>
+						<option value="TNHSC&UNIVOFMadras">TNHSC&UNIV OF Madras</option>
+						<option value="CBSE&OtherState/OtherUNIV">CBSE&Other
+							State/Other UNIV</option>
+						<option value="ForeignBoard/UNIV">Foreign Board/UNIV</option>
+						<option value="Others">Others</option>
+				</select>&nbsp;&nbsp;</td>
+			</tr>
+			<tr>
+				<td><br></td>
+
+			</tr>
+			<tr>
+				<td></td>
+				<td align="right"><input type="submit" class="button"
+					value="PAYMENT" /> &nbsp;&nbsp;</td>
+				<td>
+
+					<button type="button" data-ng-click=HISTORY() class="button">
+						HISTORY</button>
+
+
+				</td>
+				<td></td>
+			</tr>
+		</table>
+
+	</form> -->
+
+
+
+	<!--       <div class="row">
+        <div class="col-md-6">
+            <p class="input-group">
+              <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p>
+        </div>
+    </div> -->
+	<!--
+    DatePicker ends -->
+
+
+<!-- 	<table  border="0" cellspacing="0" cellpadding="0" align="center">
+		<tr>
+			<td height="29" colspan="3" background="images/title-bg.jpg"
+				bgcolor="#b2dafa" align="center"><strong>FEES History</strong></td>
+		</tr>
+		<tr>
+			<td bgcolor="#8eb8da">
+				<table  border="1" cellpadding="5" cellspacing="0"
+					bordercolor="#6691b3" style="border-collapse: collapse;">
+					<tr class="table-title">
+
+
+						<th width="229" align="center" valign="middle" >S.no</th>
+						<th width="229" align="center" valign="middle">Receipt number</th>
+						<th width="229" align="center" valign="middle">Date</th>
+						<th width="229" align="center" valign="middle">Actual Fee</th>
+						<th width="229" align="center" valign="middle">Fine</th>
+						<th width="229" align="center" valign="middle">Due</th>
+						<th width="229" align="center" valign="middle">Fee Paid</th>
+						<th width="229" align="center" valign="middle">Fees Need To Pay</th>
+						<th width="229" align="center" valign="middle">Remarks</th>
+
+					</tr>
+					<tr data-ng-repeat="feeHistorys in lsfeeHistorys">
+						<td>{{ $index
+								+1}}</td>
+						<td><a href=""
+							data-ng-click="PARTICULARHISTORY(feeHistorys.id)">{{feeHistorys.receiptNo}}</a></td>
+						<td>{{feeHistorys.date}}</td>
+						<td>{{feeHistorys.actualFee}}</td>
+						<td>{{feeHistorys.fine}}</td>
+						<td>{{feeHistorys.due}}</td>
+						<td>{{feeHistorys.feePaid}}</td>
+						<td>{{feeHistorys.feeNeedTOPay}}</td>
+						<td>{{feeHistorys.remarks}}</td>
+
+
+					</tr>
+
+				</table>
+			</td>
+		</tr>
+	</table>
+ -->
+
+
+

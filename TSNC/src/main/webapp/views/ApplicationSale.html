@@ -1,0 +1,115 @@
+<br>
+	<alert ng-repeat="alert in alerts" type="{{alert.type}}"
+		close="closeAlert($index)">{{alert.msg}}</alert>
+<div align="center">
+	<form data-ng-submit=Appsalesubmit()>
+		<table style="float:left; margin-left: 10%;margin-right: 10px;" >
+			<tr>
+				<td><label class="lb">Student Name:*</label></td>
+				<td><input type="text" class="inpts"
+					data-ng-model="applicationSale.studentName" maxlength="100" required
+				/></td>
+			</tr>
+			<tr>
+				<td><label class="lb">Phone:</label></td>
+				<td><input type="text" class="inpts" pattern="(([0-9]|\s|\+|-|_|\(|\))+)" title=" 0-9 + _ ( ) -" data-ng-model="applicationSale.phone" maxlength="25"  /></td>
+			</tr>
+			<tr>
+				<td><label class="lb">Address:</label></td>
+				<td><textarea   maxlength="500" class="txtar" style="width: 158px;height:37px;"
+						data-ng-model="applicationSale.address"
+					></textarea></td>
+			</tr>
+			
+			<tr>
+				<td><label class="lb">Gender:*</label></td>
+				<td><input type="radio" data-ng-model="applicationSale.gender" checked
+					value="M"
+				/>male <input type="radio" data-ng-model="applicationSale.gender"  
+					value="F"
+				/>female</td>
+			</tr>
+				<tr>
+				<td><label class="lb">Sale Date:*</label></td>
+					<td class="input-group">
+					<input class="inpts"   style="width:115px;" type="text" required datepicker-popup="dd-MM-yyyy"  data-ng-model="applicationSale.date"
+						is-open="opened"  data-ng-keydown="open($event)" max-date="{{todaydate}}"  data-ng-required="true" close-text="Close"  />
+
+					<button height=22; type="button" class="btn btn-default"
+						data-ng-click="open($event)"  >
+						<img height=14; src="images/datepickers.jpg"></img>
+					<!-- <i class="glyphicon glyphicon-calendar"></i> -->
+					</button>
+
+				
+				</td>
+		<!-- 	<td>  <p class="input-group">
+              <input type="text" class="form-control"  required  datepicker-popup="{{format}}" ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'" datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true" close-text="Close" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+            </p></td> -->
+			</tr>
+			</table>
+			<table >
+			<tr>
+				<td><label class="lb">Application Number:*</label></td>
+				<td><input type="text" class="inpts" maxlength="35" 
+					data-ng-model="applicationSale.applicationNo" required
+				/></td>
+			</tr>
+			<!-- 	<tr>
+				<td><label class="lb">Course Category:</label></td>
+				<td><input type="radio" data-ng-model="applicationSale.courseCategory"
+					value="UG"
+				/>UG <input type="radio" data-ng-model="applicationSale.courseCategory"
+					value="PG"
+				/>PG</td>
+			</tr> -->
+			<tr>
+				<td><label class="lb">Course:*</label></td>
+				<td>
+				 <select  class="inpts" data-ng-model="choosencourse" data-ng-change="selectedcorse()" style="width: 158px;"
+					data-ng-options=" course[0] group by course[1]  for  course in lscourses "
+					required>
+					<option value="">--------Select --------</option>
+				</select></td></tr>
+			<tr>
+				<td><label class="lb">Amount Paid:*</label></td>
+				<td><input type="number" class="inpts" min="0" step="0.01" max="9999999999"  
+					data-ng-model="applicationSale.amountPaid"    required
+				/></td>
+			</tr>
+		
+			<tr>
+				<td><label class="lb">Form Sales Location:*</label></td>
+				<td><!-- <input type="text" class="inpts"
+					data-ng-model="applicationSale.salesLocation" required
+				/> -->
+						<select  class="inpts" data-ng-model="applicationSale.salesLocation" required style="width: 158px;"
+					data-ng-options=" lct.location  as lct.location  for  lct in locations "
+					required>
+					<option value="">--------Select --------</option>
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<td><label class="lb">Receipt Number:*</label></td>
+				<td><input type="text" class="inpts" data-ng-model="applicationSale.reciptNo" maxlength="35"
+					required
+				/></td>
+			</tr>
+		</table>
+			<div class="clr"></div>
+			<br>
+		
+		<div align="center">
+		
+		<input class="button"  type="submit" value="Submit "/>
+		<input class="button"  type="reset"  value="Reset"  data-ng-click="resetsale()"/>
+		</div>
+	</form>
+		
+</div>
+
+<div class="clr"></div>

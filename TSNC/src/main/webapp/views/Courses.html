@@ -1,0 +1,64 @@
+
+<alert data-ng-repeat="alert in alerts" type="{{alert.type}}"	close="closeAlert($index)">{{alert.msg}}</alert>
+<div  align="center">
+<form data-ng-submit=GO()>
+	Batch Start Year:* <input type="number" class="inpts"
+		data-ng-model='batchStrYr' min="2000" max="2999" required/>
+		 <input type="submit" name="Submit" value="GO" class="button" />
+</form>
+</div>
+<form data-ng-submit=SAVE() >
+	<table  align="center">
+		<td bgcolor="#8eb8da">
+			<table class="tbl-inner">
+				
+				<tr class="tbl-title">
+					<td width="64" >S.No</td>
+					<!--     <td >id</td> -->
+					<td width="170" >Course</td>
+					<td width="75" >Course Category</td>
+					<td width="64" >Sanctioned Strength</td>
+					<td width="64">BatchStartYear</td>
+					<td  width="64">Adhoc</td>
+						<td  width="80">Roll Number Code</td>
+					<td width="64" >Delete</td>
+				</tr>
+				
+				<tr data-ng-repeat="course in courses">
+					<td align="center">{{ $index +1}}</td>
+					<!-- 	   <td align="center" >{{course.id}}</td> -->
+					<td align="center"><input type="text" maxlength="44"
+						data-ng-model='course.course' required
+					/></td>
+					<td align="center"><select name="select"
+						data-ng-model="course.courseCategory" required
+					>
+							<option value="">Select</option>
+							<option value="UG">UG</option>
+							<option value="PG">PG</option>
+					</select></td>
+					<td align="center"><input type="number"  min="0" max="9999999" style="width:64px;"
+						data-ng-model='course.sanctionedStrength' required
+					/></td>
+					<td align="center">{{course.batchStrYr}}</td>
+					<td align="center"  ><input type="number"  min="0" max="50" style="width:64px;"
+						data-ng-model='course.adhoc' required
+					/></td>
+							<td align="center"><input type="text"   maxlength="10"
+						data-ng-model='course.rollcode' required
+					/></td>
+					<td align="center"><input type="checkbox"
+						 data-ng-model='course.del'
+					/></td>
+				</tr>
+			</table>
+		</td>
+	</table>
+	<div align="center">
+		<button type="button" data-ng-click=ADD() class="button">ADD
+		</button>
+		<input type="submit" name="Submit" value="SAVE" class="button" />
+		<button type="button" data-ng-click=DELETE() class="button">DELETE
+		</button>
+	</div>
+</form>

@@ -1,0 +1,449 @@
+<div align="center">
+	<label >Report Type:</label> 
+	
+	<select class="inpts"
+		data-ng-model="reportType" data-ng-change="show(reportType)" required
+		style="width: 158px;" required
+	>
+		<option value="">--------Select --------</option>
+		<option value="0">Application Sales</option>
+		<option value="1">Admission Report</option>
+		<option value="2">Fees Report</option>
+		<option value="3">Student Master Report</option>
+	</select>
+</div>
+<br>
+
+<div data-ng-controller="ApplictionSalesRPCtrl"
+	data-ng-show="tabs.active()=='ApplictionSales'" align="center"
+>
+	<alert data-ng-repeat="alert in alerts" type="{{alert.type}}"
+		close="closeAlert($index)"
+	>{{alert.msg}}</alert>
+	<label class="tbl-title">Application Sales Report</label> <br>
+	<form data-ng-submit="GO()">
+		<table>
+		
+			<tr>
+				<td><label class="frmlb">Course:*</label></td>
+				<td><select class="inpts" data-ng-model="saleReportReq.course" data-ng-change="dwn_prv_btn=false"
+					required style="width: 158px;"
+					data-ng-options=" course[0] as course[0]   for  course  in lscourses  "
+					required
+				>
+						<option value="">--------Select --------</option>
+						<option value="ALL">ALL</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td><label class="frmlb"> Location:*</label></td>
+				<td><select class="inpts"
+					data-ng-model="saleReportReq.salesLocation" required data-ng-change="dwn_prv_btn=false"
+					style="width: 158px;"
+					data-ng-options=" lct.location  as lct.location  for  lct in locations "
+					required
+				>
+						<option value="">--------Select --------</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td><label class="frmlb">From Date:*</label></td>
+				<td><label class="frmlb"> To Date:*</label></td>
+			</tr>
+			<tr>
+				<td class="input-group"><input class="inpts"  data-ng-keydown="openfrm($event)" 
+					style="width: 110px;" type="text" datepicker-popup="dd-MM-yyyy"
+					data-ng-model="saleReportReq.frmdate" is-open="openedfrm" data-ng-change="dwn_prv_btn=false"
+					data-ng-required="true" close-text="Close" required
+				/>
+					<button height=20; type="button" class="btn btn-default"
+						data-ng-click="openfrm($event)"
+					>
+						<img height=14; src="images/datepickers.jpg"></img>
+					</button>&nbsp;&nbsp;</td>
+				<td class="input-group"><input class="inpts" data-ng-keydown="opento($event)"   data-ng-change="dwn_prv_btn=false"
+					style="width: 110px;" type="text" datepicker-popup="dd-MM-yyyy"
+					data-ng-model="saleReportReq.todate" is-open="openedto"
+					data-ng-required="true" close-text="Close" required
+				/>
+					<button height=20; type="button" class="btn btn-default"
+						data-ng-click="opento($event)" 
+					>
+						<img height=14; src="images/datepickers.jpg"></img>
+					</button>&nbsp;</td>
+			</tr>
+			<tr>
+				<td><label class="frmlb">Format:*</label></td>
+				<td><select class="inpts" data-ng-model="saleReportReq.format" data-ng-change="dwn_prv_btn=false"
+					required style="width: 158px;" required
+				>
+						<option value="">--------Select --------</option>
+						<option value="pdf">pdf</option>
+						<option value="xls">xls</option>
+				</select></td>
+			</tr>
+		</table>
+		<input height=22; type="submit" class="button" value="Go" />
+	</form>
+
+	<div align="center" data-ng-show="dwn_prv_btn" >
+		<a data-ng-href="{{down}}" target="_self"
+			style="text-decoration:none;" download>
+			<button height=22; type="button" class="lgbutton">Download</button>
+		</a> &nbsp;&nbsp; <a data-ng-href="{{prev}}"
+			target="_blank" style="text-decoration:none;">
+			<button height=22; type="button" class="lgbutton">Preview</button>
+		</a>
+	</div>
+</div>
+
+
+<div data-ng-controller="FeesRPCtrl"
+	data-ng-show="tabs.active()=='FeesReport'" align="center"
+>
+	<alert data-ng-repeat="alert in alerts" type="{{alert.type}}"
+		close="closeAlert($index)"
+	>{{alert.msg}}</alert>
+	<label class="tbl-title">Fees Report</label> <br>
+	<form data-ng-submit="GO()">
+		<table>
+		
+			<tr>
+				<td><label class="frmlb">Course:*</label></td>
+				<td><select class="inpts" data-ng-model="feesReportReq.course" data-ng-change="dwn_prv_btn=false"
+					required style="width: 158px;"
+					data-ng-options=" course[0] as course[0]   for  course  in lscourses  "
+					
+				>
+						<option value="">--------Select --------</option>
+						<option value="ALL">ALL</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td><label class="frmlb"> Semester:*</label></td>
+				<td>
+				<select name="select" data-ng-model="feesReportReq.sem"
+					class="inpts" required>
+						<option value="">Select</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="0">ALL</option>
+				</select></td>
+			</tr>
+					<tr>
+				<td><label class="frmlb"> Status:*</label></td>
+				<td>
+				<select name="select" data-ng-model="feesReportReq.status"
+					class="inpts" required>
+						<option value="">Select</option>
+						<option value="PAID">PAID</option>
+						<option value="UNPAID">UNPAID</option>
+						<option value="BOTH">BOTH</option>
+						
+				</select></td>
+			</tr>
+			<tr>
+				<td><label class="frmlb">From Date:*</label></td>
+				<td><label class="frmlb"> To Date:*</label></td>
+			</tr>
+			<tr>
+				<td class="input-group"><input class="inpts" 
+					style="width: 110px;" type="text" data-ng-keydown="openfrm($event)"   datepicker-popup="dd-MM-yyyy"
+					data-ng-model="feesReportReq.frmdate" is-open="openedfrm" data-ng-change="dwn_prv_btn=false"
+					data-ng-required="true" close-text="Close" required
+				/>
+					<button height=20; type="button" class="btn btn-default"
+						data-ng-click="openfrm($event)"
+					>
+						<img height=14; src="images/datepickers.jpg"></img>
+					</button>&nbsp;&nbsp;</td>
+				<td class="input-group"><input class="inpts" data-ng-keydown="opento($event)"    data-ng-change="dwn_prv_btn=false"
+					style="width: 110px;" type="text" datepicker-popup="dd-MM-yyyy"
+					data-ng-model="feesReportReq.todate" is-open="openedto"
+					data-ng-required="true" close-text="Close" required
+				/>
+					<button height=20; type="button" class="btn btn-default"
+						data-ng-click="opento($event)" 
+					>
+						<img height=14; src="images/datepickers.jpg"></img>
+					</button>&nbsp;</td>
+			</tr>
+			<tr>
+				<td><label class="frmlb">Format:*</label></td>
+				<td><select class="inpts" data-ng-model="feesReportReq.format" data-ng-change="dwn_prv_btn=false"
+					required style="width: 158px;" required
+				>
+						<option value="">--------Select --------</option>
+						<option value="pdf">pdf</option>
+						<option value="xls">xls</option>
+				</select></td>
+			</tr>
+		</table>
+		<input height=22; type="submit" class="button" value="Go" />
+	</form>
+
+	<div align="center" data-ng-show="dwn_prv_btn" >
+		<a data-ng-href="{{down}}" target="_self"
+			style="text-decoration:none;" download>
+			<button height=22; type="button" class="lgbutton">Download</button>
+		</a> &nbsp;&nbsp; <a data-ng-href="{{prev}}"
+			target="_blank" style="text-decoration:none;">
+			<button height=22; type="button" class="lgbutton">Preview</button>
+		</a>
+	</div>
+</div>
+
+
+<div data-ng-controller="MasterRPCtrl"
+	data-ng-show="tabs.active()=='StudentMasterReport'" align="center"
+>
+	<alert data-ng-repeat="alert in alerts" type="{{alert.type}}"
+		close="closeAlert($index)"
+	>{{alert.msg}}</alert>
+	<label class="tbl-title">Student Master Report</label> <br><br><br>
+	<form data-ng-submit="GenerateMaster()">
+	<table>
+	
+		<tr>
+				<td><label class="frmlb">Batch Start Year:*</label></td>
+				<td><input type="number" class="inpts" style="width: 158px;"  min="2000" max="2999" data-ng-model="masterReport.batchStryr" 
+					required />&nbsp;&nbsp;
+				</td></tr>
+					
+				<!--
+				 future for PG report 
+				 <tr>
+				<td><label class="frmlb">Course Category:*</label></td>
+				<td><select name="select" data-ng-model="masterReport.courseCategory"
+					class="inpts" required>
+						<option value="">Select</option>
+						<option value="UG">UG</option>
+						<option value="PG">PG</option>
+								
+				</select>
+				</td></tr> 
+				-->
+					<tr>
+				
+				<td><label class="frmlb">Format:*</label></td>
+				<td><select class="inpts" data-ng-model="masterReport.format" data-ng-change="dwn_prv_btn=false"
+					 style="width: 158px;" required
+				>
+						<option value="">--------Select --------</option>
+					
+						<option value="xls">xls</option>
+				</select></td>
+		</tr>
+	</table>
+	<input  type="submit" class="button" value="Generate" />
+			
+	
+	</form>
+	
+	<div align="center" data-ng-show="dwn_prv_btn" >
+		<a data-ng-href="{{down}}" target="_self"
+			style="text-decoration:none; " download>
+			<button height=22; type="button" class="lgbutton">Download</button>
+		</a> &nbsp;&nbsp; <a data-ng-href="{{prev}}"
+			target="_blank" style="text-decoration:none;">
+			<button height=22; type="button" class="lgbutton">Preview</button>
+		</a>
+	</div>
+	</div>
+	
+	
+	<div data-ng-controller="AdmissionRPCtrl"
+	data-ng-show="tabs.active()=='AdmissionReport'" align="center"
+>
+	<alert data-ng-repeat="alert in alerts" type="{{alert.type}}"
+		close="closeAlert($index)"
+	>{{alert.msg}}</alert>
+	<label class="tbl-title">Student Admission Report</label> <br><br><br>
+	<form data-ng-submit="GenerateAdmission()">
+	<table>
+	<tr>
+	<td><label class="frmlb">Batch Start Year:*</label></td>
+				<td><input type="number" class="inpts" style="width: 200px; "  min="2000" max="2999" data-ng-model="admissionReportReq.batchstartyear" 
+					required />
+				</td>
+	</tr>
+		<tr>
+				<td><label class="frmlb">From Date:*</label></td>
+				<td><label class="frmlb"> To Date:*</label></td>
+			</tr>
+		<tr>
+				<td class="input-group"><input class="inpts" data-ng-keydown="openfrm($event)"  
+					style="width: 110px;" type="text" datepicker-popup="dd-MM-yyyy"
+					data-ng-model="admissionReportReq.fromdate" is-open="openedfrm" data-ng-change="dwn_prv_btn=false"
+					data-ng-required="true" close-text="Close" required
+				/>
+					<button height=20; type="button" class="btn btn-default"
+						data-ng-click="openfrm($event)"
+					>
+						<img height=14; src="images/datepickers.jpg"></img>
+					</button>&nbsp;&nbsp;</td>
+				<td class="input-group"><input class="inpts"  data-ng-keydown="opento($event)"   data-ng-change="dwn_prv_btn=false"
+					style="width: 110px;" type="text" datepicker-popup="dd-MM-yyyy"
+					data-ng-model="admissionReportReq.todate" is-open="openedto"
+					data-ng-required="true" close-text="Close" required
+				/>
+					<button height=20; type="button" class="btn btn-default"
+						data-ng-click="opento($event)" 
+					>
+						<img height=14; src="images/datepickers.jpg"></img>
+					</button>&nbsp;</td>
+			</tr>
+				<tr>
+				<td><label class="frmlb">Format:*</label></td>
+				<td><select class="inpts" data-ng-model="admissionReportReq.reportFormat" data-ng-change="dwn_prv_btn=false"
+					 style="width: 158px;" required
+				>
+						<option value="">--------Select --------</option>
+						<option value="pdf">pdf</option>
+						<option value="xls">xls</option>
+								
+				</select></td>
+		</tr>
+	</table>
+	<input  type="submit" class="button" value="Generate" />
+			
+	
+	</form>
+	
+	<div align="center" data-ng-show="dwn_prv_btn" >
+		<a data-ng-href="{{down}}" target="_self"
+			style="text-decoration:none; " download>
+			<button height=22; type="button" class="lgbutton">Download</button>
+		</a> &nbsp;&nbsp; <a data-ng-href="{{prev}}"
+			target="_blank" style="text-decoration:none;">
+			<button height=22; type="button" class="lgbutton">Preview</button>
+		</a>
+	</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <a data-ng-href="/TSNC/reports/report.ods" target="_self"
+			style="text-decoration:none;">
+			<button height=22; type="button" class="lgbutton">Download</button>
+		</a> &nbsp;&nbsp; <a data-ng-href="/TSNC/reports/report.pdf"
+			target="_blank" style="text-decoration:none;">
+			<button height=22; type="button" class="lgbutton">Preview</button>
+		</a>
+
+
+<button height=22; type="button" 
+						data-ng-click="GO()">Go</button>
+						
+		<a data-ng-href="/TSNC/reports/report.pdf"  target="_blank" type="button" class="btn" >pdf</a>
+		<a data-ng-href="Files/Reports/report.ods"  target="_blank" type="button" class="btn" download>ods</a>
+		<a data-ng-href="Files/Reports/report.odt"  target="_blank" type="button" class="btn" download>odt</a>
+		
+		<form data-ng-submit="GO()">
+		<table>
+			<tr>
+				<td><label class="frmlb">Graduation Course:*</label></td>
+				<td><select class="inpts"
+					data-ng-model="saleReportReq.courseCategory"
+					data-ng-change="dwn_prv_btn=false" required style="width: 158px;"
+					required
+				>
+						<option value="">--------Select --------</option>
+						<option value="UG">UG</option>
+						<option value="PG">PG</option>
+						<option value="ALL">ALL</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td><label class="frmlb">Course:*</label></td>
+				<td><select class="inpts" data-ng-model="saleReportReq.course"
+					data-ng-change="dwn_prv_btn=false" required style="width: 158px;"
+					data-ng-options=" course[0] as course[0]   for  course  in lscourses | filter:saleReportReq.courseCategory "
+					required
+				>
+						<option value="">--------Select --------</option>
+						<option value="ALL">ALL</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td><label class="frmlb"> Location:*</label></td>
+				<td><select class="inpts"
+					data-ng-model="saleReportReq.salesLocation" required
+					style="width: 158px;"
+					data-ng-options=" lct.location  as lct.location  for  lct in locations "
+					required
+				>
+						<option value="">--------Select --------</option>
+				</select></td>
+			</tr>
+			<tr>
+				<td><label class="frmlb">From Date:*</label></td>
+				<td><label class="frmlb"> To Date:*</label></td>
+			</tr>
+			<tr>
+				<td class="input-group"><input class="inpts"
+					style="width: 110px;" type="text" datepicker-popup="dd-MM-yyyy"
+					data-ng-model="saleReportReq.frmdate" is-open="openedfrm"
+					data-ng-required="true" close-text="Close"
+				/>
+					<button height=20; type="button" class="btn btn-default"
+						data-ng-click="openfrm($event)"
+					>
+						<img height=14; src="images/datepickers.jpg"></img>
+					</button>&nbsp;&nbsp;</td>
+				<td class="input-group"><input class="inpts"
+					style="width: 110px;" type="text" datepicker-popup="dd-MM-yyyy"
+					data-ng-model="saleReportReq.todate" is-open="openedto"
+					data-ng-required="true" close-text="Close"
+				/>
+					<button height=20; type="button" class="btn btn-default"
+						data-ng-click="opento($event)"
+					>
+						<img height=14; src="images/datepickers.jpg"></img>
+					</button>&nbsp;</td>
+			</tr>
+			<tr>
+				<td><label class="frmlb">Format:*</label></td>
+				<td><select class="inpts" data-ng-model="saleReportReq.format"
+					required style="width: 158px;" required
+				>
+						<option value="">--------Select --------</option>
+						<option value="pdf">pdf</option>
+						<option value="odt">odt</option>
+						<option value="org">org</option>
+				</select></td>
+			</tr>
+		</table>
+		<input height=22; type="submit" class="button" value="Go" />
+	</form>
+ -->

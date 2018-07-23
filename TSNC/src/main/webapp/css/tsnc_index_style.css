@@ -1,0 +1,74 @@
+<!--
+bar,data picker timer ,slider
+ http://angular-ui.github.io/bootstrap/
+ table,tab,
+http://getbootstrap.com/css
+ -->
+ 
+ /* CSS Document */
+body {
+	background:#a9d4f6 url(../images/main-bg.jpg) no-repeat center top !important;
+	margin:0px;
+	padding:0px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	color:#063583;
+	}
+	
+.logo-txt {
+
+	color:#063583;
+
+ font-size:40px;
+ 
+
+
+ padding:30px 0px 0px 0px;
+ 
+
+ }
+	
+	.login-bg {
+	background:#a9d4f6 url(../images/bg.jpg) no-repeat center top;
+	}
+	
+	.login-wrap {
+	font-size:13px;
+	color:#ffffff;
+	}
+	
+	.button {
+	background:url(../images/btn-bg.png) no-repeat;
+	border:none;
+	width:73px;
+	height:32px;
+	text-align:center;
+	text-transform:uppercase;
+	font-weight:bold;
+	color:#063583;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	cursor:pointer;
+	margin:5px 0px;
+	padding:0px 4px 3px 0px;
+	}
+	
+	.hd {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	
+	color:#ffffff;
+	}	
+.lTxt {
+	color:#063583;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	padding:7px;
+	width:215px;
+	border:none;
+	}
+	
+.txt-small {
+	font-size:11px;
+	}
+	

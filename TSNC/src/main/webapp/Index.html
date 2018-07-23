@@ -1,0 +1,85 @@
+<!DOCTYPE >
+<html lang="en" data-ng-app="TSNC_index">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link href="css/tsnc_index_style.css" rel="stylesheet" type="text/css" />
+<script src="js/vendor/angular.js"></script>
+<script src="js/vendor/ui-bootstrap-tpls-0.11.0.js"></script>
+
+<script src="js/IndexCtrl.js"></script>
+<link rel="stylesheet" href="css/bootstrap.min.css" />
+<title>TSNC</title>
+</head>
+<body data-ng-controller="Ctrl" class="login-bg">
+	<br>
+	<br>
+	<div align="center">
+		<span class="logo-txt">T.S.Narayanaswami College Of
+			Arts &amp; Science</span>
+	</div>
+	<div class="login-wrap">
+		<table width="440" border="0" align="center" cellpadding="0"
+			cellspacing="0">
+			<tr>
+				<td height="50">&nbsp;</td>
+			</tr>
+			<tr>
+				<td height="373" align="center" valign="top"
+					background="images/login-bg.png">
+					<table width="370" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+							<td height="20">&nbsp; <alert ng-repeat="alert in alerts"
+									type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert></td>
+						</tr>
+						<tr>
+							<td width="107" align="center" valign="middle"><img
+								src="images/tsn-logo.png" width="107" height="95"/></td>
+						</tr>
+						<tr>
+							<td height="20">&nbsp;</td>
+						</tr>
+						<tr>
+							<td>
+								<form data-ng-submit=Login_submit()>
+									<table width="370" border="0" cellspacing="0" cellpadding="0">
+										<tr>
+											<td width="90" align="right" valign="middle" class="hd">User
+												ID:<br />
+											</td>
+											<td width="18" align="left" valign="middle">&nbsp;</td>
+											<td width="262" align="left" valign="middle"><input
+												name="textfield" type="text" data-ng-model="login.username"
+												required class="lTxt"/></td>
+										</tr>
+										<tr>
+											<td height="15">&nbsp;</td>
+										</tr>
+										<tr>
+											<td align="right" valign="middle" class="hd">Password:</td>
+											<td align="left" valign="middle">&nbsp;</td>
+											<td align="left" valign="middle"><input
+												name="textfield2" type="password"
+												data-ng-model="login.password" required class="lTxt"/></td>
+										</tr>
+										<tr>
+											<td height="30">&nbsp;</td>
+										</tr>
+									</table>
+									<div align="center">
+										<input type="submit" name="Submit" value="LOGIN"
+											class="button"/>
+											<input type="reset" name="Submit" value="Cancel"
+											class="button"/>
+									</div>
+								</form>
+							</td>
+						</tr>
+						<tr>
+						</tr>
+					</table>
+				</td>
+			</tr>
+		</table>
+	</div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+
+<!DOCTYPE >
+<html  lang="en" data-ng-app="TSNC_main">
+<head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+
+
+  
+<!-- <link href="css/tsnc_style.css"  rel="stylesheet"  type="text/css" /> -->
+<link href="css/tsnc_main_style.css" rel="stylesheet" type="text/css" />
+
+
+
+<script src="js/vendor/angular.js"></script>
+<script src="js/vendor/angular-route.js"></script>
+
+<script src="js/vendor/ui-bootstrap-tpls-0.11.0.js"></script>
+<script src="js/vendor/underscore-min.js"></script>
+<!-- 
+added to fix the input type=number for ie 11 but not worked
+ <script src="js/vendor/jquery-1.10.2.min.js"></script>
+ <script src="js/vendor/number-polyfill.js"></script> 
+ -->
+ 
+   <script src="js/FeesCtrl.js"></script>
+      <script src="js/ReportCtrl.js"></script>
+   <script src="js/ApplicationSaleCtrl.js"></script>
+   <script src="js/FormCtrl.js"></script>
+    <script src="js/FeeStructureCtrl.js"></script>
+       <script src="js/CoursesCtrl.js"></script>
+       <script src="js/ResetPasswordCtrl.js"></script>
+     
+   <script src="js/Main.js"></script>
+   
+ 
+<!--    <link  href="css/bootstrap.css" rel="stylesheet" type="text/css" /> -->
+<link  href="css/bootstrap.min.css" rel="stylesheet" type="text/css" /> 
+<!--  
+to fix timer arrow 
+
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" rel="stylesheet">
+  
+ -->
+<title>TSN College Application</title>
+</head>
+
+
+<body  style="background:#a9d4f6 url(images/main-bg.jpg) no-repeat center top;">
+	<div style="width:980px;height:auto ;margin:0px auto 0px ;	padding:0px ;">
+	<div data-ng-controller="MainCtrl">
+	<!--Header Starts Here-->
+	<div id="header" >
+  <div class="logo"><img src="images/tsn-college-logo.jpg" border="0" alt="TSN College" title="TSN College" /></div>
+  <div class="logo-txt">T.S.Narayanaswami College Of Arts &amp; Science</div>
+  <div class="details">Welcome {{name}}<br /><a href="" data-ng-click=Logout()>Logout &nbsp;   <span class="logout-icon"><img width="20" height="20" src="images/logout.png" border="0" /></span> </a></div>
+  <div class="clr"></div>
+</div>
+
+	<div id="navbar">
+      	<ul id="nav">
+			<!-- <li data-ng-class="{ 'current_page_item': tab==1 }"><a href="#/Home" data-ng-click="tab=1">Home</a></li> -->
+			<li data-ng-class="{ 'current_page_item': tab==2 }"><a href="#/ApplicationSales" data-ng-click="tab=2">Application Sales</a></li>
+			<li data-ng-class="{ 'current_page_item': tab==3 }"><a href="#/Form" data-ng-click="tab=3">Application Form</a></li>
+			<li data-ng-class="{ 'current_page_item': tab==4 }"><a href="#/Fees"  data-ng-click="tab=4">Fees</a></li>
+			<li data-ng-class="{ 'current_page_item': tab==5 }"><a  href="#/Report" data-ng-click="tab=5">Report</a></li>
+			<li data-ng-class="{ 'current_page_item': tab==6 }"><a  href="#/FeeStructure" data-ng-click="tab=6">Fee Structure</a></li>
+			<li data-ng-class="{ 'current_page_item': tab==7 }"><a  href="#/Courses" data-ng-click="tab=7">Courses</a></li>
+			<li data-ng-class="{ 'current_page_item': tab==8 }"  data-ng-show="role==2"><a  href="#/ResetPassword" data-ng-click="tab=8">Reset Password</a></li>
+		</ul>
+	</div>
+	</div>
+	<!--Header Ends Here-->	
+	
+	<!--Content Starts Here-->
+	<div id="content"  data-ng-view>
+	</div>
+	<!--Content Ends Here-->
+	</div>
+</body>
+
+</html>
+ 

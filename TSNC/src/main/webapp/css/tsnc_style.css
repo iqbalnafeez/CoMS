@@ -1,0 +1,363 @@
+<!--
+bar,data picker timer ,slider
+ http://angular-ui.github.io/bootstrap/
+ table,tab,
+http://getbootstrap.com/css
+ -->
+ 
+ /* CSS Document */
+/* input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: n !important;
+    
+} */
+body {
+	background:#a9d4f6 url(../images/main-bg.jpg) no-repeat center top !important;
+	margin:0px;
+	padding:0px;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	color:#063583;
+	}
+	
+#wrapper {
+	width:980px;
+	height:auto;
+	margin:0px auto 0px;
+	padding:0px;
+	}
+	
+/* Header */
+	
+#header {
+	background:#002e79;
+	margin:0px auto 0px;
+	padding:0px;
+	height:92px;
+	font-size:12px;
+	color:#FFFFFF;
+	text-transform:uppercase;
+	}
+	
+.logo {
+	width:100px;
+	float:left;
+	}
+	
+.details {
+	width:150px;
+	text-align:right;
+	float:right;
+	line-height:24px;
+	padding:20px 0px 0px 0px;
+	}
+
+.logout-icon {
+	float:right;
+	margin:0px;
+	}
+	
+/* Navigation */
+
+#navbar {
+	background:url(../images/menu-bg.jpg) repeat-x;
+    color: #FFFFFF;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 12px;
+	text-transform:uppercase;
+    width: 980px;
+	height:41px;
+}
+
+#nav {
+    margin: 0;
+    padding: 0;
+}
+
+#nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+#nav li {
+    background: url(../images/divider.jpg) no-repeat right top;
+    list-style: none;
+    margin: 0;
+    padding: 11px 16px 14px 16px;
+	float:left;
+}
+
+#nav li a, #nav li a:link, #nav li a:visited {
+    color: #FFFFFF;
+    display: block;
+    margin: 0;
+    padding: 0px;
+    text-align: center;
+	text-decoration: none;
+}
+
+#nav li a:hover, #nav li a:active {
+    background: url(../images/menu-hover.jpg) no-repeat center top;
+    color: #63c1ff;
+    margin: 0;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+}
+
+#nav li li a, #nav li li a:link, #nav li li a:visited {
+    background: #626262;
+    border-bottom: 1px solid #7e7e7e;
+    color: #FFFFFF;
+    float: none;
+    margin: 0;
+    padding: 8px 10px;
+    text-align:left;
+}
+
+#nav li li a:hover, #nav li li a:active {
+    background: #0d0d0d;
+    border-bottom: 1px solid #7e7e7e;
+    color: #63c1ff;
+    margin: 0;
+    padding: 8px 10px;
+}
+
+#nav li.current_page_item a {
+    color: #63c1ff;
+    margin: 0;
+    padding: 0px;
+    text-align: center;
+    text-decoration: none;
+}
+
+#nav li ul {
+    height: auto;
+    left: -999em;
+    margin: 0;
+    padding: 0;
+    position: absolute;
+    width: 170px;
+    z-index: 9999;
+}
+
+#nav li li {
+}
+
+#nav li ul a {
+    width: 140px;
+}
+
+#nav li ul a:hover, #nav li ul a:active {
+}
+
+#nav li ul ul {
+    margin: -32px 0 0 171px;
+}
+
+#nav li:hover ul ul, #nav li:hover ul ul ul, #nav li.sfhover ul ul, #nav li.sfhover ul ul ul {
+    left: -999em;
+}
+
+#nav li:hover ul, #nav li li:hover ul, #nav li li li:hover ul, #nav li.sfhover ul, #nav li li.sfhover ul, #nav li li li.sfhover ul {
+    left: auto;
+}
+
+#nav li:hover, #nav li.sfhover {
+    position: static;
+}
+
+#content {
+	width:980px;
+	margin:0px auto 0px;
+	padding:10px 0px;
+	}
+
+h1 {
+	font-family:"Trebuchet MS";
+	font-size:18px;
+	text-transform:uppercase;
+	color:#fff;
+	margin:10px 0px;
+	padding:0px;
+	}
+	
+.pre {
+	width:500px;
+	float:right;
+	margin:-30px 0px 0px 0px;
+	text-align:right;
+	}
+	
+.dd {
+	background:#6185c1;
+	padding:5px;
+	font-size:12px;
+	color:#FFFFFF;
+	text-transform:uppercase;
+	font-weight:bold;
+	border:none;
+	font-family:Arial, Helvetica, sans-serif;
+	}
+	
+.txtfield {
+
+	padding:7px;
+	
+	font-size:11px;
+	color:#FFFFFF;
+	text-transform:uppercase;
+	border:none;
+	width:50px;
+
+	}
+	
+.btn1 {
+	background:url(../images/btn-bg.jpg) repeat-x;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	color:#FFFFFF;
+	border:none;
+	text-align:center;
+	padding:5px 7px 3px 7px;
+	font-weight:bold;
+	cursor:pointer;
+	}
+	
+.clr {
+	clear:both;
+	}
+	
+#tuition-fees {
+	width:980px;
+	margin:0px auto 0px;
+	padding:10px 0px;
+	}
+	
+#tuition-fees #formL {
+	width:435px;
+	float:left;
+	}
+	
+#tuition-fees #formR {
+	width:435px;
+	float:right;
+	}
+	
+label {
+	width:175px;
+	float:left;
+	line-height:28px;
+	}
+	
+.fDetails {
+	width:250px;
+	font-weight:bold;
+	float:right;
+	line-height:28px;
+	}
+	
+.txtfield1 {
+		background:url(../images/textfield-bg.jpg) repeat-x;
+
+	border:1px solid #93b8d6;
+	color:#063583;
+	padding:4px;
+	width:242px;
+	float:right;
+	margin-bottom:10px;
+	font-family:Arial, Helvetica, sans-serif;
+
+	}
+	.logo-txt {
+ width:650px;
+ float:left;
+ font-family:"Times New Roman", Times, serif;
+ font-size:24px;
+ text-transform:uppercase;
+ padding:30px 0px 0px 0px;
+ }
+
+
+	
+.dd1 {
+	background:#FFFFFF;
+	border:1px solid #93b8d6;
+	color:#063583;
+	padding:4px;
+	width:252px;
+	float:right;
+	margin-bottom:10px;
+	font-family:Arial, Helvetica, sans-serif;
+	}
+	
+.table-title {
+	color:#FFFFFF;
+	text-shadow:1px 1px #5d8bb0;
+	font-weight:bold;
+	}
+	
+.button {
+	background:url(../images/btn-bg.png) no-repeat;
+	border:none;
+	width:73px;
+	height:32px;
+	text-align:center;
+	text-transform:uppercase;
+	font-weight:bold;
+	color:#063583;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:12px;
+	cursor:pointer;
+	margin:5px 0px;
+	padding:0px 4px 3px 0px;
+	}
+	
+	
+/* 	login strat ******************** */
+.login-bg {
+	background:#a9d4f6 url(../images/bg.jpg) no-repeat center top;
+	}
+	
+.login-wrap {
+	font-size:13px;
+	color:#ffffff;
+	}
+	
+.title {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:30px;
+	font-weight:bold;
+	color:#ffffff;
+	}
+
+.hd {
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:17px;
+	font-weight:bold;
+	color:#ffffff;
+	}	
+.lTxt {
+	color:#063583;
+	font-family:Arial, Helvetica, sans-serif;
+	font-size:13px;
+	padding:7px;
+	width:215px;
+	border:none;
+	}
+	
+.txt-small {
+	font-size:11px;
+	}
+	
+.txt-small a {
+	color:#ffffff;
+	text-decoration:underline;
+	}
+	
+.txt-small a:hover {
+	color:#ffffff;
+	text-decoration:none;
+	}
+	/* login end ++++++++++++++++++++++++++++++ */

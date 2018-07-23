@@ -1,0 +1,825 @@
+
+
+<alert ng-repeat="alert in alerts" type="{{alert.type}}"
+		close="closeAlert($index)"
+	>{{alert.msg}}</alert>
+	
+<div class="pre"
+	data-ng-show="tabs.active()=='STUDENTINFO' || tabs.active()=='APPFORMREQ' "
+>
+	<form data-ng-submit=checkappno()>
+		<select class="dd" data-ng-model="feereq.type" required>
+			<option value="">----- Please Select -----</option>
+			<option value="ano">Application Number</option>
+			<option value="rno">Roll Number</option>
+		</select> <input type="text" class="txtfield" data-ng-model="feereq.num"
+			required
+		/> <input type="submit" name="Submit" value="GO" class="btn1" />
+	</form>
+</div>
+
+<div class="clr"></div>
+
+<div data-ng-show="tabs.active()=='STUDENTINFO'" align="center">
+<form  data-ng-submit=SAVEMANDINFO()>
+<table style="background: #d5ecff url(images/table-bg.jpg) repeat-x">
+		<tr>
+				<td>&nbsp;&nbsp;</td>
+			<td   style="padding:0px;" >
+
+				<table>
+					<tr >
+						<td><label class="frmlb">Application No:</label></td>
+						<td><label class="frmlb">
+								{{studentFormInfo.applicationNo}}</label></td>
+					</tr>
+					<tr>
+						<td><label class="frmlb">Roll No:</label></td>
+						
+						<td><label class="frmlb">
+								{{studentFormInfo.rollNo}}</label></td>
+					</tr>
+					<tr>
+						<td><label class="frmlb">Applicant Name:*</label></td>
+						<td><input type="text" class="inpts"  maxlength="100"
+							data-ng-model="studentFormInfo.name" data-ng-change="change()" 
+							required
+						/></td>
+					</tr>
+					<tr>
+				<td><label class="frmlb">Gender:*</label></td>
+				<td><input  type="radio" data-ng-model="studentFormInfo.gender"
+					value="M" data-ng-change="change()" 
+				/>Male <input type="radio" data-ng-model="studentFormInfo.gender"
+					value="F" data-ng-change="change()"
+				/>Female</td>
+			</tr>
+			<tr>
+						<td><label class="frmlb">Community:*</label></td>
+						<td><select class="inpts" style="width:155px; " data-ng-change="change()"
+							data-ng-model="studentFormInfo.community" required 
+						>
+								<option  value="">----- Please Select -----</option>
+								<option>OC</option>
+								<option>BCM</option>
+								<option>BC</option>
+								<option>MBC</option>
+								<option>SCA</option>
+								<option>SC</option>
+								<option>ST</option>
+						</select></td>
+					</tr>
+				
+					<tr></tr>
+				</table>
+			</td><td   style="padding:8px;">
+				<table>
+	<tr>
+						<td><label class="frmlb">Graduation Course:*</label></td>
+						<td><input type="radio" class="inpts" data-ng-disabled="disablecrsbat"
+							data-ng-model="studentFormInfo.courseCategory" value="UG" data-ng-change="change()" 
+						/>UG <input type="radio" class="inpts" data-ng-disabled="disablecrsbat"
+							data-ng-model="studentFormInfo.courseCategory" value="PG" data-ng-change="change()"
+						/>PG</td>
+					</tr>
+			<tr></tr>
+					<tr>
+				<td><label class="frmlb">Course:*</label></td>
+				<td>
+				 <select  class="inpts" data-ng-model="studentFormInfo.course"  data-ng-disabled="disablecrsbat" style="width: 200px;" 
+					data-ng-options=" course[0] as course[0]   for  course  in lscourses | filter:studentFormInfo.courseCategory "
+					data-ng-change="change()" required>
+					<option value="">--------Select --------</option>
+				</select></td></tr>
+		
+					<tr></tr>
+					<tr>
+						<td><label class="frmlb">Batch Start Year:*</label></td>
+						<td><input type="number" class="inpts" style="width: 200px; " data-ng-disabled="disablecrsbat" min="2000" max="2999"
+							data-ng-model="studentFormInfo.batchStrYr" data-ng-change="change()" required
+						/></td>
+					</tr>
+					<tr>
+						<td><label class="frmlb">Last Academic Type :*</label></td>
+						
+				
+					<td><select  class="inpts" name="select" 
+					data-ng-model="studentFormInfo.lastAcademicType" data-ng-change="change()" required style="font-size:12px;">
+						<option value="">Select</option>
+						<option value="TNHSC&UNIVOFMadras">TNHSC&UNIV OF Madras</option>
+						<option value="CBSE&OtherState/OtherUNIV">CBSE&Other State/Other UNIV</option>
+						<option value="ForeignBoard/UNIV">Foreign Board/UNIV</option>
+					
+
+				</select></td>	</tr>
+					<tr></tr>
+					<tr>
+						<td><label class="frmlb">Details :</label></td>
+						<td><textarea  class="txtar" maxlength="500" style="width: 200px; height:40px" 
+								data-ng-model="studentFormInfo.acddetail" data-ng-change="change()" 
+							></textarea></td>
+					</tr>
+					<tr></tr>
+					
+					<tr></tr>
+				</table>
+			
+	
+			</td><td  style="padding:8px; width:210px" >
+			<div align="center">
+	<img border="0" style="padding:8px; height:150px; width:150px" data-ng-src="{{studentFormInfo.photoLocation}}" />
+
+<br>
+	<input type="file" id="choosefile" value="Upload" style="display:none;"
+							onchange="angular.element(this).scope().setQues(this)" >	
+<button type="button" data-ng-click="callUpload('choosefile')" class="button">Upload</button>
+</div>	</td></tr>
+	</table>
+	<div class="clr"></div>
+			<div align="center"><input type="submit" class="button" value="Save" />&nbsp;&nbsp;
+				<!-- <button type="button" data-ng-click=CANCELMANDINFO() class="button">Cancel</button> -->
+	</div>
+				
+</form>
+
+<form  data-ng-submit=STDFRMINFO()>
+
+	<div id="lef" style="width: 45%; float: left;">
+	
+		<table >
+			<tr>
+				
+			<td>		<label  class="lb">Application Date:*</label></td>
+			<td class="input-group">
+					<input class="inpts"  data-ng-keydown="opend($event)"  style="width:115px;" type="text" datepicker-popup="dd-MM-yyyy" data-ng-model="studentFormInfo.date"
+						is-open="openedd" data-ng-required="true" max-date="{{todaydate}}"  close-text="Close" required />
+
+					<button height=22; type="button" class="btn btn-default"
+						data-ng-click="opend($event)" >
+						<img height=14; src="images/datepickers.jpg"></img>
+					
+					</button>
+
+				
+				</td>
+		</tr>
+			<tr>
+				<td><label class="lb">Date of Birth:*</label></td>
+				<td class="input-group">
+					<input class="inpts"  data-ng-keydown="opendob($event)"   style="width:115px;" type="text" datepicker-popup="dd-MM-yyyy" data-ng-model="studentFormInfo.dob" 
+						is-open="openeddob" data-ng-required=true close-text="Close" required/>
+
+					<button height=22; type="button" class="btn btn-default"
+						ng-click="opendob($event)" >
+						<img height=14; src="images/datepickers.jpg"></img>
+						
+					</button>
+
+				
+				</td>
+			</tr>
+	
+			
+			
+			<tr>
+				<td><label class="lb">Nationality:*</label></td>
+				<td><select  class="inpts" name="select" 
+					data-ng-model="studentFormInfo.nationality" required style="width:155px;">
+					<option value="">-- select --</option>
+  <option value="afghan">Afghan</option>
+  <option value="albanian">Albanian</option>
+  <option value="algerian">Algerian</option>
+  <option value="american">American</option>
+  <option value="andorran">Andorran</option>
+  <option value="angolan">Angolan</option>
+  <option value="antiguans">Antiguans</option>
+  <option value="argentinean">Argentinean</option>
+  <option value="armenian">Armenian</option>
+  <option value="australian">Australian</option>
+  <option value="austrian">Austrian</option>
+  <option value="azerbaijani">Azerbaijani</option>
+  <option value="bahamian">Bahamian</option>
+  <option value="bahraini">Bahraini</option>
+  <option value="bangladeshi">Bangladeshi</option>
+  <option value="barbadian">Barbadian</option>
+  <option value="barbudans">Barbudans</option>
+  <option value="batswana">Batswana</option>
+  <option value="belarusian">Belarusian</option>
+  <option value="belgian">Belgian</option>
+  <option value="belizean">Belizean</option>
+  <option value="beninese">Beninese</option>
+  <option value="bhutanese">Bhutanese</option>
+  <option value="bolivian">Bolivian</option>
+  <option value="bosnian">Bosnian</option>
+  <option value="brazilian">Brazilian</option>
+  <option value="british">British</option>
+  <option value="bruneian">Bruneian</option>
+  <option value="bulgarian">Bulgarian</option>
+  <option value="burkinabe">Burkinabe</option>
+  <option value="burmese">Burmese</option>
+  <option value="burundian">Burundian</option>
+  <option value="cambodian">Cambodian</option>
+  <option value="cameroonian">Cameroonian</option>
+  <option value="canadian">Canadian</option>
+  <option value="cape verdean">Cape Verdean</option>
+  <option value="central african">Central African</option>
+  <option value="chadian">Chadian</option>
+  <option value="chilean">Chilean</option>
+  <option value="chinese">Chinese</option>
+  <option value="colombian">Colombian</option>
+  <option value="comoran">Comoran</option>
+  <option value="congolese">Congolese</option>
+  <option value="costa rican">Costa Rican</option>
+  <option value="croatian">Croatian</option>
+  <option value="cuban">Cuban</option>
+  <option value="cypriot">Cypriot</option>
+  <option value="czech">Czech</option>
+  <option value="danish">Danish</option>
+  <option value="djibouti">Djibouti</option>
+  <option value="dominican">Dominican</option>
+  <option value="dutch">Dutch</option>
+  <option value="east timorese">East Timorese</option>
+  <option value="ecuadorean">Ecuadorean</option>
+  <option value="egyptian">Egyptian</option>
+  <option value="emirian">Emirian</option>
+  <option value="equatorial guinean">Equatorial Guinean</option>
+  <option value="eritrean">Eritrean</option>
+  <option value="estonian">Estonian</option>
+  <option value="ethiopian">Ethiopian</option>
+  <option value="fijian">Fijian</option>
+  <option value="filipino">Filipino</option>
+  <option value="finnish">Finnish</option>
+  <option value="french">French</option>
+  <option value="gabonese">Gabonese</option>
+  <option value="gambian">Gambian</option>
+  <option value="georgian">Georgian</option>
+  <option value="german">German</option>
+  <option value="ghanaian">Ghanaian</option>
+  <option value="greek">Greek</option>
+  <option value="grenadian">Grenadian</option>
+  <option value="guatemalan">Guatemalan</option>
+  <option value="guinea-bissauan">Guinea-Bissauan</option>
+  <option value="guinean">Guinean</option>
+  <option value="guyanese">Guyanese</option>
+  <option value="haitian">Haitian</option>
+  <option value="herzegovinian">Herzegovinian</option>
+  <option value="honduran">Honduran</option>
+  <option value="hungarian">Hungarian</option>
+  <option value="icelander">Icelander</option>
+  <option value="indian">Indian</option>
+  <option value="indonesian">Indonesian</option>
+  <option value="iranian">Iranian</option>
+  <option value="iraqi">Iraqi</option>
+  <option value="irish">Irish</option>
+  <option value="israeli">Israeli</option>
+  <option value="italian">Italian</option>
+  <option value="ivorian">Ivorian</option>
+  <option value="jamaican">Jamaican</option>
+  <option value="japanese">Japanese</option>
+  <option value="jordanian">Jordanian</option>
+  <option value="kazakhstani">Kazakhstani</option>
+  <option value="kenyan">Kenyan</option>
+  <option value="kittian and nevisian">Kittian and Nevisian</option>
+  <option value="kuwaiti">Kuwaiti</option>
+  <option value="kyrgyz">Kyrgyz</option>
+  <option value="laotian">Laotian</option>
+  <option value="latvian">Latvian</option>
+  <option value="lebanese">Lebanese</option>
+  <option value="liberian">Liberian</option>
+  <option value="libyan">Libyan</option>
+  <option value="liechtensteiner">Liechtensteiner</option>
+  <option value="lithuanian">Lithuanian</option>
+  <option value="luxembourger">Luxembourger</option>
+  <option value="macedonian">Macedonian</option>
+  <option value="malagasy">Malagasy</option>
+  <option value="malawian">Malawian</option>
+  <option value="malaysian">Malaysian</option>
+  <option value="maldivan">Maldivan</option>
+  <option value="malian">Malian</option>
+  <option value="maltese">Maltese</option>
+  <option value="marshallese">Marshallese</option>
+  <option value="mauritanian">Mauritanian</option>
+  <option value="mauritian">Mauritian</option>
+  <option value="mexican">Mexican</option>
+  <option value="micronesian">Micronesian</option>
+  <option value="moldovan">Moldovan</option>
+  <option value="monacan">Monacan</option>
+  <option value="mongolian">Mongolian</option>
+  <option value="moroccan">Moroccan</option>
+  <option value="mosotho">Mosotho</option>
+  <option value="motswana">Motswana</option>
+  <option value="mozambican">Mozambican</option>
+  <option value="namibian">Namibian</option>
+  <option value="nauruan">Nauruan</option>
+  <option value="nepalese">Nepalese</option>
+  <option value="new zealander">New Zealander</option>
+  <option value="ni-vanuatu">Ni-Vanuatu</option>
+  <option value="nicaraguan">Nicaraguan</option>
+  <option value="nigerien">Nigerien</option>
+  <option value="north korean">North Korean</option>
+  <option value="northern irish">Northern Irish</option>
+  <option value="norwegian">Norwegian</option>
+  <option value="omani">Omani</option>
+  <option value="pakistani">Pakistani</option>
+  <option value="palauan">Palauan</option>
+  <option value="panamanian">Panamanian</option>
+  <option value="papua new guinean">Papua New Guinean</option>
+  <option value="paraguayan">Paraguayan</option>
+  <option value="peruvian">Peruvian</option>
+  <option value="polish">Polish</option>
+  <option value="portuguese">Portuguese</option>
+  <option value="qatari">Qatari</option>
+  <option value="romanian">Romanian</option>
+  <option value="russian">Russian</option>
+  <option value="rwandan">Rwandan</option>
+  <option value="saint lucian">Saint Lucian</option>
+  <option value="salvadoran">Salvadoran</option>
+  <option value="samoan">Samoan</option>
+  <option value="san marinese">San Marinese</option>
+  <option value="sao tomean">Sao Tomean</option>
+  <option value="saudi">Saudi</option>
+  <option value="scottish">Scottish</option>
+  <option value="senegalese">Senegalese</option>
+  <option value="serbian">Serbian</option>
+  <option value="seychellois">Seychellois</option>
+  <option value="sierra leonean">Sierra Leonean</option>
+  <option value="singaporean">Singaporean</option>
+  <option value="slovakian">Slovakian</option>
+  <option value="slovenian">Slovenian</option>
+  <option value="solomon islander">Solomon Islander</option>
+  <option value="somali">Somali</option>
+  <option value="south african">South African</option>
+  <option value="south korean">South Korean</option>
+  <option value="spanish">Spanish</option>
+  <option value="sri lankan">Sri Lankan</option>
+  <option value="sudanese">Sudanese</option>
+  <option value="surinamer">Surinamer</option>
+  <option value="swazi">Swazi</option>
+  <option value="swedish">Swedish</option>
+  <option value="swiss">Swiss</option>
+  <option value="syrian">Syrian</option>
+  <option value="taiwanese">Taiwanese</option>
+  <option value="tajik">Tajik</option>
+  <option value="tanzanian">Tanzanian</option>
+  <option value="thai">Thai</option>
+  <option value="togolese">Togolese</option>
+  <option value="tongan">Tongan</option>
+  <option value="trinidadian or tobagonian">Trinidadian or Tobagonian</option>
+  <option value="tunisian">Tunisian</option>
+  <option value="turkish">Turkish</option>
+  <option value="tuvaluan">Tuvaluan</option>
+  <option value="ugandan">Ugandan</option>
+  <option value="ukrainian">Ukrainian</option>
+  <option value="uruguayan">Uruguayan</option>
+  <option value="uzbekistani">Uzbekistani</option>
+  <option value="venezuelan">Venezuelan</option>
+  <option value="vietnamese">Vietnamese</option>
+  <option value="welsh">Welsh</option>
+  <option value="yemenite">Yemenite</option>
+  <option value="zambian">Zambian</option>
+  <option value="zimbabwean">Zimbabwean</option>
+					</select>
+				
+				
+				</td>
+			</tr>
+		
+			<tr>
+				<td><label class="lb">Religion:*</label></td>
+				<td><select  class="inpts" name="select" 
+					data-ng-model="studentFormInfo.religion" required style="width:155px;">
+					<option value="">-- select one --</option> 
+ 					<option value="Hinduism">Hinduism</option> 
+ 					<option value="African Traditional & Diasporic">African Traditional & Diasporic</option> 
+ 					<option value="Agnostic">Agnostic</option> 
+ 					<option value="Atheist">Atheist</option> 
+ 					<option value="Baha'i">Baha'i</option> 
+ 					<option value="Buddhism">Buddhism</option> 
+ 					<option value="Cao Dai">Cao Dai</option> 
+ 					<option value="Chinese traditional religion">Chinese traditional religion</option> 
+ 					<option value="Christianity">Christianity</option> 
+ 					<option value="Islam">Islam</option> 
+ 					<option value="Jainism">Jainism</option> 
+ 					<option value="Juche">Juche</option> 
+ 					<option value="Judaism">Judaism</option> 
+ 					<option value="Neo-Paganism">Neo-Paganism</option> 
+ 					<option value="Nonreligious">Nonreligious</option> 
+ 					<option value="Rastafarianism">Rastafarianism</option> 
+					<option value="Secular">Secular</option> 
+ 					<option value="Shinto">Shinto</option> 
+ 					<option value="Sikhism">Sikhism</option> 
+ 					<option value="Spiritism">Spiritism</option> 
+ 					<option value="Tenrikyo">Tenrikyo</option> 
+ 					<option value="Unitarian-Universalism">Unitarian-Universalism</option> 
+ 					<option value="Zoroastrianism">Zoroastrianism</option> 
+ 					<option value="primal-indigenous">primal-indigenous</option> 
+					</select>
+				
+				<!-- 
+				<input type="text"  class="inpts"
+					data-ng-model="studentFormInfo.religion"  required
+				/> --></td>
+			</tr>
+		
+			
+			
+			<tr>
+				<td><label class="lb">Mother Tongue:</label></td>
+				<td><input type="text"  class="inpts" maxlength="35"
+					data-ng-model="studentFormInfo.motherTongue"
+					
+				/></td>
+			</tr>
+		
+			<tr>
+				<td><label class="lb">Blood Group:</label></td>
+				<td>
+				<select  class="inpts" name="select"  
+					data-ng-model="studentFormInfo.bloodGroup" required style="width:155px;">
+						<option value="">-- select one --</option> 
+						<option value="A Positive">A Positive</option>
+						<option value="A Negative">A Negative</option>
+						<option value="B Positive">B Positive</option>
+						<option value="B Negative">B Negative</option>
+						<option value="AB Positive">AB Positive</option>
+						<option value="AB Negative">AB Negative</option>
+						<option value="O Positive">O Positive</option>
+						<option value="O Negative">O Negative</option>
+				</select>
+				</td>
+			</tr>
+			
+			<tr>
+				<td><label class="lb">Are you physically Handicapped:*</label></td>
+				<td><input  type="radio" data-ng-model="studentFormInfo.phyhandi"
+					data-ng-value="true"
+				/>Yes <input type="radio" data-ng-model="studentFormInfo.phyhandi"
+					data-ng-value="false" 
+				/>No</td>
+			</tr>
+			
+			<tr data-ng-if="studentFormInfo.phyhandi == true">
+				<td ><label class="lb" >If yes,give the details:</label></td>
+				<td ><textarea class="txtar"  maxlength="500"  style="width: 157px;" class="txtar"
+						data-ng-model="studentFormInfo.handicapped"
+					></textarea></td>
+			</tr>
+	
+			<tr>
+				<td><label class="lb">Communication Address:*</label></td>
+				<td><textarea class="txtar" maxlength="500"  style="width: 157px;"
+						data-ng-model="studentFormInfo.commAddress" required
+					></textarea></td>
+			</tr>
+	<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			</tr><tr>
+			
+				<td><label class="lb">Extra Curricular Activity:</label></td>
+				<td><textarea class="txtar" maxlength="500"  style="width: 157px;"
+						data-ng-model="studentFormInfo.excuractivity"
+					></textarea></td>
+			</tr>
+		</table>
+	</div>
+	<div id="rig" style="width: 45%; float: left;">
+		<table>
+			<tr>
+				<td><label class="lb">Parent/Guardian Name:*</label></td>
+				<td><input type="text"  class="inpts" maxlength="100"
+					data-ng-model="studentFormInfo.parentname"
+					 required
+				/></td>
+			</tr>
+			
+			<tr>
+				<td><label class="lb">Occupation:*</label></td>
+				<td><input type="text"  class="inpts" maxlength="40"
+					data-ng-model="studentFormInfo.occupation"
+					 required
+				/></td>
+			</tr>
+	
+			<tr>
+				<td><label class="lb">Annual Income:*</label></td>
+				<td><input type="number"  class="inpts" min="0" step="0.01" max="9999999999"
+					data-ng-model="studentFormInfo.annincome" required
+				/></td>
+			</tr>
+		
+			<tr>
+				<td><label class="lb">Contact Person Name:</label></td>
+				<td><input type="text"  class="inpts" maxlength="100"
+					data-ng-model="studentFormInfo.contactname"
+					
+				/></td>
+			</tr>
+	
+			<tr>
+				<td><label class="lb">Contact Person Phone No:</label></td>
+				<td><input type="text"  class="inpts" pattern="(([0-9]|\s|\+|-|_|\(|\))+)" title=" 0-9 + _ ( ) -"  maxlength="25"
+					data-ng-model="studentFormInfo.contactphone"
+					
+				/></td>
+			</tr>
+		
+			<tr>
+				<td><label class="lb">Are you ward of ex-service man:</label></td>
+				<td><input type="radio"
+					data-ng-model="studentFormInfo.wardofExservice" data-ng-value="true"
+				/>Yes <input type="radio"
+					data-ng-model="studentFormInfo.wardofExservice" data-ng-value="false"
+				/>No</td>
+			</tr>
+	
+			<tr>
+				<td><label class="lb">Official Address of Parents:</label></td>
+				<td><textarea class="txtar"  maxlength="500"  style="width: 157px;"
+						data-ng-model="studentFormInfo.officialAaddress"
+					></textarea></td>
+			</tr>
+			<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			</tr>
+			<tr>
+				<td><label class="lb">Permanent Address:</label></td>
+				<td><textarea class="txtar" maxlength="500" style="width: 157px;"
+						data-ng-model="studentFormInfo.permAaddress"
+					></textarea></td>
+			</tr>
+				<tr>
+			<td>&nbsp;</td>
+			<td>&nbsp;</td>
+			</tr>
+			
+			
+		</table>
+	</div>
+	<div class="clr"></div>
+	<input type="submit"  data-ng-class="{'lgbutton' : !isDisabled, 'disabledbutton' : isDisabled}"   value="Save / Next" data-ng-disabled="isDisabled"/>
+	
+</form>
+</div>
+
+
+<div data-ng-show="tabs.active()=='PGFORM'" align="center" >
+<form  data-ng-submit=PGFRMSAVE()>
+	<br>
+	
+	<div align="center">
+	<table >
+		<tr>
+			<td>
+	<label class="lb">Name Of Qualifying Exam:*</label>
+	</td>
+	<td><input type="text" class="inpts" maxlength="40"
+		data-ng-model="pgform.qualifyexam" 
+		required
+	/></td></tr>
+	<tr>
+			<td>
+	<label class="lb"> Name Of College:*</label></td>
+	<td><input type="text" class="inpts" maxlength="40"
+		data-ng-model="pgform.collegename" 
+		required
+	/></td></tr>
+	<tr>
+			<td>
+	<label class="lb"> Name Of University:*</label></td>
+	<td><input type="text" class="inpts" maxlength="40"
+		data-ng-model="pgform.university" required
+	/></td></tr>
+	<tr>
+			<td>
+	<label class="lb">Mark Secured:*</label></td>
+	<td><input type="text" class="inpts"  maxlength="40"
+		data-ng-model="pgform.mark" required
+	/></td></tr>
+	<tr>
+			<td> 
+	<label class="lb">Percentage/Grade Obtain:*</label></td>
+	<td><input type="text" class="inpts" maxlength="40"
+		data-ng-model="pgform.percentage"  required
+	/></td></tr>
+
+		<tr>
+				
+			<td>		<label  class="lb">Year & Month of passing:*</label></td>
+			<td class="input-group">
+					<input class="inpts" data-ng-disabled=true  style="width:115px;" type="text" datepicker-popup="MMMM-yyyy" data-ng-model="pgform.passout"
+						is-open="openedPO"data-ng-required="true" required close-text="Close" />
+
+					<button height=22; type="button" class="btn btn-default"
+						ng-click="openPO($event)" >
+						<img height=14; src="images/datepickers.jpg"></img>
+					
+					</button>
+
+				
+				</td>
+		</tr>
+	<tr>
+			<td> <label class="lb">If old student of this college ,state theBranch and roll
+	no,with year of study:</label></td>
+	<td>
+	<textarea  class="txtar" maxlength="500"  style="width: 157px; height:80px;"
+		data-ng-model="studentFormInfo.oldstd"
+	></textarea></td></tr>
+	</table>
+	<br>
+	<input type="submit"  class="lgbutton" value="Save / Next"/>
+	<button type="button" data-ng-click=backfromugandpg() class="button" >Back</button>
+	</div>
+	</form>
+</div>
+
+<div data-ng-show="tabs.active()=='UGFORM'" >
+<form  data-ng-submit=UGFRMSAVE()>
+
+
+
+<div align="center">
+	<table>
+		<tr>
+			<td style="padding-right: 100px;">
+				<table>
+					<tr>
+			<td >
+	<label class="frmlb">	Name & Location of School Last Studied:*</label>
+	</td>
+	<td><textarea class="txtar" required maxlength="500"  style="width: 200px;" data-ng-model="ugForm.lastschoolname"></textarea></td></tr>
+	</table>
+			</td>
+			<td>
+			<table>
+	<tr>
+			<td>
+	<label class="frmlb">Break of Study if any:</label></td>
+	<td>	<textarea class="txtar" maxlength="500"  style="width: 200px;"  data-ng-model="ugForm.breakstudy"></textarea></td></tr>
+		
+
+	
+	</table>
+	</td>
+	</tr>
+	</table>
+	</div>
+
+
+
+	<br>
+	<table >
+		<tr>
+			<td class="tbl-head">Qualifying examination Passed</td>
+		</tr>
+		<tr>
+			<td bgcolor="#8eb8da">
+				<table class="tbl-inner"
+				>
+					<tr class="tbl-title">
+						<td width="229" >Subject</td>
+						<td width="180" >Mark Obtained</td>
+						<td width="180">Maximum Mark</td>
+						<td width="229" >Reg Number</td>
+						<td width="229" >Year Of Pass</td>
+						<td width="229" >No of attempt</td>
+					</tr>
+					<tr  data-ng-repeat="subjectMarks in lssubjectMarks">
+						<td  align="center"><input type="text"  required maxlength="40" 
+							 class="" data-ng-model="subjectMarks.subject"
+						/></td>
+						<td  align="center"><input type="number"  style="width: 158px" required  min="0" max="{{(subjectMarks.maxmark ==0 ||subjectMarks.maxmark ==null ) ? 200: subjectMarks.maxmark}}"
+							 class="" data-ng-model="subjectMarks.markobtain" data-ng-change="calc()"
+						/></td>
+						<td  align="center"><input type="number" required  min="0" max="200"
+							 class="" data-ng-model="subjectMarks.maxmark" data-ng-change="calc()"
+						/></td>
+						<td  align="center"><input type="text" required maxlength="40" 
+							 class="" data-ng-model="subjectMarks.regno"
+						/></td>
+						<td  align="center"><input type="text" required maxlength="40" 
+							 class="" data-ng-model="subjectMarks.yearofpass"
+						/></td>
+						<td  align="center"><input type="number" required   min="0" max="50"
+							 class="" data-ng-model="subjectMarks.attempt"
+						/></td>
+			
+					</tr>
+						<tr>
+						<td  align="center">total</td>
+						<td  align="center">
+						{{ugForm.totalmarkobtained}}
+						<!-- <input type="number" readonly required  min="0"
+							 class="" data-ng-model="ugForm.totalmarkobtained"
+						/> --></td>
+						<td  align="center">
+						{{ugForm.totalmaxmark}}
+						<!-- <input type="number" readonly required  min="0"
+							 class="" data-ng-model="ugForm.totalmaxmark" 
+						/> --></td>
+						<td  align="center">overal percentage</td>
+						<!--  min="0" max="100" step="0.1" -->
+						<td  align="center">
+						{{ugForm.percentage}}
+						<!-- <input type="number" readonly required
+							 class="" data-ng-model="ugForm.percentage"
+						/> --></td>
+						<td  align="center"></td>
+					</tr>
+				
+				</table>
+			</td>
+		</tr>
+	</table>
+	<div align="center">
+	<input type="submit" class="lgbutton" value="save / Next"/>
+	<button type="button" data-ng-click=backfromugandpg() class="button" >Back</button>
+	</div>
+	</form>
+</div>
+
+
+<div data-ng-show="tabs.active()=='REFERRALINFO'" >
+	
+	<br>
+	<div align="center">
+		<table>
+			<tr>
+				<td><label class="rflb">How did you know about the
+						college?</label></td>
+				<td><select name="select"	data-ng-model="referralInfo.howknow"  class="inpts" style="width:200px;">
+					<option  value="" >Select</option> 
+						<option value="NewsPaper">NewsPaper/Media</option>
+						<option value="Social Network">Social Network</option>
+						<option value="Friends/Relatives">Friends/Relatives</option>
+						<option value="College Staff/Student">College Staff/Student</option>
+					</select>
+					
+			</td>
+			
+					<td>&nbsp;&nbsp;</td>
+					</tr>
+				<tr>
+				<td><label class="rflb">Why have you have selected TSN
+						college?</label></td>
+				<td><textarea  class="txtar" maxlength="500" 
+						style="width: 200px; height: 50px;"
+						data-ng-model="referralInfo.whyselect"
+					></textarea></td>
+			
+		<td>&nbsp;&nbsp;</td>
+			</tr>
+				<tr>
+			
+			
+				<td><label class="rflb">Name of
+						student/teacher/staff/parent others who urged you to join TSN
+						college</label></td>
+				<td><textarea class="txtar" maxlength="500"
+						style="width: 200px; height: 50px;"
+						data-ng-model="referralInfo.whourged"
+					></textarea></td>
+					<td>&nbsp;&nbsp;</td>
+					</tr>
+				<tr>
+				<td><label class="rflb">If any fiends/relatives currently
+						studying in TSN . Please mention their Name and course:-</label></td>
+				<td><textarea class="txtar" maxlength="500"
+						style="width: 200px; height: 50px;"
+						data-ng-model="referralInfo.frndstudy"
+					></textarea></td>
+		
+			<td>&nbsp;&nbsp;</td>
+			
+			
+			</tr>
+			<tr>
+				<td><label class="rflb">Reference(atleast two,one who
+						should not be relative)</label></td>
+				
+				<td>&nbsp;&nbsp;</td>
+			<td>&nbsp;&nbsp;</td>
+		</tr>
+				<tr>
+				<td ><textarea  class="txtar" maxlength="500"
+						style="width: 220px; height: 50px;"
+						data-ng-model="referralInfo.ref1" placeholder="Reference1"
+					></textarea>&nbsp;&nbsp;&nbsp;&nbsp;
+				<textarea class="txtar" maxlength="500"
+						style="width: 220px; height: 50px;"
+						data-ng-model="referralInfo.ref2" placeholder="Reference2"
+					></textarea></td>
+					<td>&nbsp;&nbsp;</td>
+			</tr>
+		</table>
+		<br>
+		<button type="button" data-ng-click=REFERRALINFO() class="button">Submit</button>
+		<button type="button" data-ng-click=backfromreferalinfo() class="button" >Back</button>
+	</div>
+</div>
+
+
+<!-- 
+ -->

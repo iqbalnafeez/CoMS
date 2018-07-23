@@ -1,0 +1,27 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-configuration PUBLIC
+    "-//Hibernate/Hibernate Configuration DTD//EN"
+    "http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+ 
+<hibernate-configuration>
+    <session-factory>
+           
+        	<mapping class="com.tsnc.model.Login" />
+      
+        	<mapping class="com.tsnc.model.ApplicationSale" />
+      <mapping class="com.tsnc.model.StudentFormInfo" />
+		 <mapping class="com.tsnc.model.Courses" />
+		 	 <mapping class="com.tsnc.model.Concession" />
+		 <mapping class="com.tsnc.model.FeeStructure" />
+		 	 <mapping class="com.tsnc.model.Fee" />
+		 	  	 <mapping class="com.tsnc.model.FeeHistorys" />
+		 	  <mapping class="com.tsnc.model.FeeParticulars" />
+		 	   <mapping class="com.tsnc.model.FineStructure" />
+		  <mapping class="com.tsnc.model.PgForm" />
+	   <mapping class="com.tsnc.model.SubjectMarks" />
+				   <mapping class="com.tsnc.model.Location" />
+		 	    <mapping class="com.tsnc.model.ReferralInfo" />
+		    <mapping class="com.tsnc.model.StudentAdmittedReport" />
+        </session-factory>
+         
+</hibernate-configuration>

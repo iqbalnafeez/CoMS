@@ -1,0 +1,301 @@
+
+
+<div class="clr"></div>
+<div data-ng-controller="FeeCtrl">
+<alert data-ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+  
+ 
+	<form  data-ng-submit=GO()>
+		<table >
+			<tr>
+				<td>Sem:*</td>
+				<td><select class="inpts" name="select" data-ng-model="feestr.sem"
+					required data-ng-change="changelastAcademictype()">
+						<option value="">Select</option>
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+				</select></td>
+				<td>Last Academic Year:*</td>
+				<td><select  class="inpts" name="select"
+					data-ng-model="feestr.lastAcademicType" data-ng-disabled="feestr.lastAcademicType=='Others'" required>
+						<option value="">Select</option>
+						<option value="TNHSC&UNIVOFMadras">TNHSC&UNIV OF Madras</option>
+						<option value="CBSE&OtherState/OtherUNIV">CBSE&Other State/Other UNIV</option>
+						<option value="ForeignBoard/UNIV">Foreign Board/UNIV</option>
+						<option value="Others">Others</option>
+
+				</select></td>
+							<td>Course:*</td>
+				<td><select  class="inpts" name="select" data-ng-model="feestr.course"
+					data-ng-options="course[0] as course[0]  for course in courses" required>
+						<option value="">Select</option>
+				</select></td>
+				<td>Batch Start Year:*</td>
+				<td><input  class="inpts" type="number" 
+					data-ng-model='feestr.batchStrYr' min="2000"  max="2999" required /></td>
+			</tr>
+		</table>
+
+<div align="center">
+		<input type="submit" name="Submit" value="GO" class="button" />
+	</div></form>
+<table >
+		<tr>
+			<td class="tbl-head" >Fees</td>
+		</tr>
+		<tr>
+			<td bgcolor="#8eb8da">
+	
+
+	<form  data-ng-submit=SAVE()>
+
+									<table 	 class="tbl-inner">
+						<tr class="tbl-title">
+					<td width="40" >S.No</td>			
+				<!-- <td width="229" >id</td> -->
+				<td width="250">Particulars</td>
+				<td width="80" >Amount</td>
+				<td width="70">BatchStartYear</td>
+				<td width="40" >Semester</td>
+				<td width="250" >lastAcademicType</td>
+				<td width="250" >course</td>
+				<td width="50" >Delete</td>
+			</tr>
+
+			<tr data-ng-repeat="feeStructure in feeStructures">
+				<td>{{ $index +1}}</td>
+				<!-- <td>{{feeStructure.id}}</td> -->
+				<td><input type="text"  style="width:220px;"  maxlength="40"
+					data-ng-model='feeStructure.particulars' required /></td>
+				<td><input type="number"  min="0" step="0.01" max="9999999999"  style="width:80px;"
+					data-ng-model='feeStructure.amount' required /></td>
+					<td align="center">{{feeStructure.batchStrYr}}</td>
+					<td align="center">{{feeStructure.sem}}</td>
+					<td>{{feeStructure.lastAcademicType}}</td>
+					<td>{{feeStructure.course}}</td>
+				<td align="center"><input type="checkbox" name="textfield"
+					data-ng-model='feeStructure.del' /></td>
+			</tr>
+		</table>
+<div align="center">
+		<button type="button" class="button" data-ng-click=ADD()>ADD</button>
+		<input type="submit" name="Submit" value="SAVE"class="button" />
+
+		<button type="button" class="button" data-ng-click=DELETE()>DELETE
+		</button>
+		</div>
+	</form>
+	</td>
+		</tr>
+	</table>
+</div>
+
+<br><br>
+<div class="clr"></div>
+<div data-ng-controller="ConcessionCtrl"	Style=" float: left ;margin-right:25px;">
+<alert data-ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+  
+ 
+	<table >
+		<tr>
+			<td class="tbl-head" >Concession</td>
+		</tr>
+		<tr>
+			<td bgcolor="#8eb8da">
+
+				<form  data-ng-submit=SAVE()>
+					<table class="tbl-inner">
+						<tr class="tbl-title">
+							<td width="50" >S.No</td>
+							<!--<td width="229" align="center" valign="middle">id</td> -->
+							<td  >Concession Type</td>
+							<td width=100 >Concession percantage</td>
+							<td width="50" >Delete</td>
+						</tr>
+
+						<tr data-ng-repeat="concession in concessions">
+							<td align="center">{{ $index +1}}</td>
+						<!-- 	<td>{{concession.id}}</td> -->
+							<td><input type="text" style="width:170px;" maxlength="40"
+								data-ng-model='concession.type' required /></td>
+							<td><input type="number"  min="0" step="0.01" max="100" style="width:90px;"
+								data-ng-model='concession.percent'  required /></td>
+							<td align="center"><input type="checkbox" 
+								data-ng-model='concession.del' /></td>
+						</tr>
+					</table>
+<div align="center">
+					<button type="button" data-ng-click=ADD()	class="button">ADD</button>
+					<input type="submit" name="Submit" value="SAVE" class="button" />
+
+					<button type="button"  data-ng-click=DELETE() class="button">DELETE</button>
+		</div>
+				</form>
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div data-ng-controller="FineCtrl"	Style="float: left ;margin-right:10px;">
+	<table  >
+		<tr>
+	
+	 		<td class="tbl-head" >Fine date</td>
+	
+	 </tr>
+		<tr>
+		<td>
+		<alert data-ng-repeat="alert in alerts" type="{{alert.type}}" close="closeAlert($index)">{{alert.msg}}</alert>
+		</td>
+		
+		</tr>
+		<tr>
+			<td bgcolor="#8eb8da">
+				<form  data-ng-submit=GO()>
+		<table  cellpadding="5" cellspacing="0">	
+					<tr>
+		<td width="70"  align="center">Batch Start Year:</td>
+				<td width="70" align="center"><input class="inpts" type="number" 
+					data-ng-model='fnbatchStrYr' min="2000"  max="2999" required /></td>
+			<td width="110" align="center">	<input type="submit"  value="GO" class="button" /></td>		
+		</tr>
+		</table>
+		</form>
+		</td>
+		</tr>
+	
+		<tr>
+		
+			<td bgcolor="#8eb8da">
+				<form  data-ng-submit=SAVE()>
+  <table class="tbl-inner" >
+		
+		
+		<tr  class="tbl-title">
+		<td width="60" >Batch start year</td>
+		<td width="45" > Semester </td>
+		<td width="160"  > Fine date</td>
+		
+		
+		</tr>	
+		
+			<tr  data-ng-repeat="fineStructure in fineStructures">
+		<td  align="center">{{fineStructure.batchStrYr}}</td>
+		<td  align="center"> {{fineStructure.sem}} 
+		 </td>
+
+		<!-- <td width="210" align="center"  class="input-group" > 
+		<span ng-if="fineStructures.dueDate ==null || fineStructures.dueDate ==undefined ||  fineStructure.dueDate >= fndate">
+		<input style="width:115px;" type="text"   datepicker-popup="dd-MM-yyyy" ng-readonly=true
+						data-ng-model="fineStructure.dueDate" is-open="opened[fineStructure.sem]" ng-required="true"
+						close-text="Close" class="frm"/>
+
+					<button height=22; type="button" class="btn btn-default"
+						ng-click="open($event,fineStructure.sem)">
+						<img height=14; src="images/datepickers.jpg"></img>
+						{{fineStructures.dueDate !=null &&  fineStructures.dueDate !=undefined &&  fineStructure.dueDate | date:"yyyy-MM-dd" < fndate | date:"yyyy-MM-dd"}}
+						--
+						{{fineStructure.dueDate | date:"yyyy-MM-dd"}}-<-{{fndate | date:"yyyy-MM-dd"  }}
+					</button></span>
+					<span ng-if="fineStructures.dueDate !=null &&  fineStructures.dueDate !=undefined &&  fineStructure.dueDate < fndate">
+					 {{fineStructure.dueDate}}
+					</span>
+					</td> -->
+					<td  align="center"  class="input-group" > 
+		<input style="width:100px;" data-ng-keydown="open($event,fineStructure.sem)" type="text"   datepicker-popup="dd-MM-yyyy" 
+						data-ng-model="fineStructure.dueDate" is-open="opened[fineStructure.sem]" required
+						close-text="Close" class="frm" required/>
+
+					<button height=22; type="button" class="btn btn-default"
+						ng-click="open($event,fineStructure.sem)">
+						<img height=14; src="images/datepickers.jpg"></img>
+						<!-- {{fineStructures.dueDate !=null &&  fineStructures.dueDate !=undefined &&  fineStructure.dueDate | date:"yyyy-MM-dd" < fndate | date:"yyyy-MM-dd"}}
+						--
+						{{fineStructure.dueDate | date:"yyyy-MM-dd"}}-<-{{fndate | date:"yyyy-MM-dd"  }} -->
+					</button>
+				
+					</td>
+	
+
+		</tr>
+</table>
+<div align="center">
+<input type="submit" name="Submit" value="SAVE" class="button" />
+</div>
+	</form>	
+</td>
+</tr>
+
+</table>
+
+</div>
+<div class="clr"></div>
+<!-- <table border="0" Style="width:100%;height:75%;">
+	  <tr Style="width:100%;height:10%;">
+	    <th>Location</th>
+	    <th>Concession</th>
+	  </tr>
+	  <tr>
+	    <td data-ng-controller="LocationCtrl">
+	  
+	    <table border="1" Style="width:50%;height:90%;">
+	  <tr Style="width:100%;height:10%;">
+	    <th>id</th>
+	    <th>Location</th>
+	  </tr>
+	  <tr data-ng-repeat="location in locations">
+	    <td>{{location.id}}</td>
+	    <td><input type="text" name="textfield" class="txtfield1" data-ng-model='location.location' /></td>
+	  </tr>
+	
+	 
+	</table>
+	
+	<button type="button" class="btn1" data-ng-click=ADD()>ADD </button>
+	<button type="button" class="btn1" data-ng-click=SAVE()>SAVE </button>
+	<button type="button" class="btn1" data-ng-click=DELETE()>DELETE  </button>
+	</td>
+	      <td data-ng-controller="ConcessionCtrl">
+	  
+	    <table border="1" Style="width:50%;height:90%;">
+	  <tr Style="width:100%;height:10%;">
+	    <th>id</th>
+	    <th>Concession Type</th>
+	     <th>Concession percantage</th>
+	  </tr>
+	  <tr>
+	    <td>January</td>
+	    <td>$100</td>
+	     <td>$100</td>
+	  </tr>
+	
+	  <tr>
+	 <td>$100</td>
+	    <td>February</td>
+	    <td>$80</td>
+	  </tr>
+	</table>
+	
+	<button type="button" class="btn1" data-ng-click=ADD()>ADD </button>
+	<button type="button" class="btn1" data-ng-click=SAVE()>SAVE </button>
+	<button type="button" class="btn1" data-ng-click=DELETE()>DELETE  </button>
+	</td>
+	  </tr>
+	   <tr>
+	    <th>FeeStructure</th>
+	    <th>Course</th>
+	  </tr>
+	  <tr>
+	    <td>February</td>
+	    <td>$80</td>
+	  </tr>
+	</table>
+	 -->
